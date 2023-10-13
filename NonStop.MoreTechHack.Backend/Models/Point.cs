@@ -1,4 +1,7 @@
-﻿namespace NonStop.MoreTechHack.Backend.Models;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
+
+namespace NonStop.MoreTechHack.Backend.Models;
 
 public class Point
 {
@@ -16,7 +19,7 @@ public class Point
     public double Longitude { get; set; }
     public object? MetroStation { get; set; }
     public int Distance { get; set; }
-    public bool Kep { get; set; }
+    public bool? Kep { get; set; }
     public bool MyBranch { get; set; }
 }
 
