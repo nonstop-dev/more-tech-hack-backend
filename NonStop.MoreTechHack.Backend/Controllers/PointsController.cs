@@ -4,7 +4,7 @@ using NonStop.MoreTechHack.Backend.Data;
 namespace NonStop.MoreTechHack.Backend.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class PointsController : ControllerBase
 {
     private readonly IPointsProvider _pointsProvider;
