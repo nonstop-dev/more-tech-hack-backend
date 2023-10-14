@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using NonStop.MoreTechHack.Backend.Models;
+using NonStop.MoreTechHack.Backend.Data;
 
 namespace NonStop.MoreTechHack.Backend.Controllers;
 
@@ -7,23 +7,23 @@ namespace NonStop.MoreTechHack.Backend.Controllers;
 [Route("[controller]")]
 public class PointsController : ControllerBase
 {
-    private readonly ILogger<PointsController> _logger;
+    private readonly IPointsProvider _pointsProvider;
 
-    public PointsController(ILogger<PointsController> logger)
-    {
-        _logger = logger;
-    }
+    public PointsController(IPointsProvider pointsProvider) =>
+        _pointsProvider = pointsProvider;
 
     [HttpGet]
     public IActionResult Get()
     {
-        return Ok(Enumerable.Empty<Point>());
+        var pointDtos = _pointsProvider.GetPoints();
+        return Ok(pointDtos);
     }
 
     [HttpGet("{id}")]
     public IActionResult Get([FromRoute] Guid id)
     {
-        return Ok(new Point());
+        var pointDto = _pointsProvider.GetPoint(id);
+        return Ok(pointDto);
     }
 
     [HttpPost("{id}/book")]
