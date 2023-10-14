@@ -5,7 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IPointsProvider, PointsProvider>();
+builder.Services
+    .AddSingleton<IPointsProvider, PointsProvider>()
+    .AddSingleton<IWorkloadProvider, WorkloadProvider>();
 
 var app = builder.Build();
 
