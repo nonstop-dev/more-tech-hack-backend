@@ -21,4 +21,5 @@ public class PointDto
     public int Distance { get; set; }
     public bool? Kep { get; set; }
     public bool MyBranch { get; set; }
+    public DateTimeOffset ScheduledTime { get; set; }
 }

@@ -5,11 +5,11 @@ namespace NonStop.MoreTechHack.Backend.Data;
 
 public class WorkloadProvider: IWorkloadProvider
 {
-    public async Task<Workload> GetWorkloadAsync(
+    public async Task<IEnumerable<Workload>> GetWorkloadAsync(
         Guid officeId, int weekNumber, ServiceType serviceType, CancellationToken cancellationToken)
     {
         var workloads = await GetWorkloadAsync(officeId, serviceType, cancellationToken);
-        return workloads.First(x => x.Week == weekNumber);
+        return workloads.Where(x => x.Week == weekNumber);
     }
 
     public async Task<int?> GetWorkloadAsync(
