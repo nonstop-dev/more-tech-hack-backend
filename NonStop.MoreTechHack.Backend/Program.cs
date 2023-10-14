@@ -7,6 +7,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services
     .AddSingleton<IPointsProvider, PointsProvider>()
+    .AddSingleton<IAtmsProvider, AtmsProvider>()
     .AddSingleton<IWorkloadProvider, WorkloadProvider>();
 
 var app = builder.Build();

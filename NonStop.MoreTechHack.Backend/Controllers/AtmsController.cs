@@ -1,23 +1,23 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NonStop.MoreTechHack.Backend.Data;
 
 namespace NonStop.MoreTechHack.Backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PointsController : ControllerBase
+public class AtmsController : ControllerBase
 {
-    private readonly IPointsProvider _pointsProvider;
+    private readonly IAtmsProvider _atmsProvider;
 
-    public PointsController(IPointsProvider pointsProvider) =>
-        _pointsProvider = pointsProvider;
+    public AtmsController(IAtmsProvider atmsProvider) =>
+        _atmsProvider = atmsProvider;
 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public IActionResult Get()
     {
-        var pointDtos = _pointsProvider.GetPoints();
+        var pointDtos = _atmsProvider.GetAtms();
         return Ok(pointDtos);
     }
 
@@ -28,18 +28,9 @@ public class PointsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public IActionResult Get([FromRoute] Guid id)
     {
-        var pointDto = _pointsProvider.GetPoint(id);
-        if (pointDto == null)
+        var atmDto = _atmsProvider.GetAtm(id);
+        if (atmDto == null)
             return NotFound(id);
-        return Ok(pointDto);
-    }
-
-    [HttpPost("{id}/book")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public IActionResult Post()
-    {
-        return NoContent();
+        return Ok(atmDto);
     }
 }
